@@ -1,0 +1,96 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Create a New Post</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+            <!-- Post Name -->
+            <div class="mb-3">
+              <label for="name" class="form-label fw-bold">Post Name</label>
+              <input
+                id="name"
+                class="form-control"
+                formControlName="name"
+                placeholder="Enter post name"
+                [class.is-invalid]="postForm.get('name')?.invalid && postForm.get('name')?.touched"
+              />
+              <div class="invalid-feedback">Post name is required.</div>
+            </div>
+
+            <!-- Content -->
+            <div class="mb-3">
+              <label for="content" class="form-label fw-bold">Content</label>
+              <textarea
+                id="content"
+                rows="5"
+                class="form-control"
+                formControlName="content"
+                placeholder="Enter content (max 5000 characters)"
+                [class.is-invalid]="postForm.get('content')?.invalid && postForm.get('content')?.touched"
+              ></textarea>
+              <div class="invalid-feedback">
+                Content is required and should not exceed 5000 characters.
+              </div>
+            </div>
+
+            <!-- Image URL -->
+            <div class="mb-3">
+              <label for="img" class="form-label fw-bold">Image URL</label>
+              <input
+                id="img"
+                type="url"
+                class="form-control"
+                formControlName="img"
+                placeholder="Enter image URL"
+                [class.is-invalid]="postForm.get('img')?.invalid && postForm.get('img')?.touched"
+              />
+              <div class="invalid-feedback">Image URL is required.</div>
+            </div>
+
+            <!-- Posted By -->
+            <div class="mb-3">
+              <label for="postedBy" class="form-label fw-bold">Posted By</label>
+              <input
+                id="postedBy"
+                class="form-control"
+                formControlName="postedBy"
+                placeholder="Enter your name"
+                [class.is-invalid]="postForm.get('postedBy')?.invalid && postForm.get('postedBy')?.touched"
+              />
+              <div class="invalid-feedback">Your name is required.</div>
+            </div>
+
+            <!-- Tags -->
+            <div class="mb-3">
+              <label for="tags" class="form-label fw-bold">Tags (comma separated)</label>
+              <input
+                id="tags"
+                class="form-control"
+                formControlName="tags"
+                placeholder="Enter tags (e.g., tag1, tag2)"
+              />
+            </div>
+
+            <!-- Alert Message -->
+            <div *ngIf="alertMessage" class="alert" [ngClass]="'alert-' + alertType">
+              {{ alertMessage }}
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-success me-2">
+                <i class="bi bi-check-circle-fill"></i> Create Post
+              </button>
+              <button type="button" class="btn btn-secondary" (click)="router.navigate(['/'])">
+                <i class="bi bi-x-circle-fill"></i> Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
